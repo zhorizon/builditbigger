@@ -1,25 +1,22 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Pair;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.udacity.gradle.builditbigger.jokedisplay.JokeActivity;
 
-
-public class MainActivity extends ActionBarActivity implements EndpointsAsyncTask.Callback {
+public class MainActivity extends ActionBarActivity {
+    MainActivityFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        fragment = (MainActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,13 +41,6 @@ public class MainActivity extends ActionBarActivity implements EndpointsAsyncTas
     }
 
     public void tellJoke(View view){
-        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "test"));
-    }
-
-    @Override
-    public void onFetchJokeFinished(String joke) {
-        Intent intent = new Intent(this, JokeActivity.class);
-        intent.putExtra("key_joke", joke);
-        startActivity(intent);
+        fragment.tellJoke(view);
     }
 }

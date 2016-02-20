@@ -57,6 +57,11 @@ public class EndpointsTest extends InstrumentationTestCase implements EndpointsA
     }
 
     @Override
+    public void onPreExecute() {
+
+    }
+
+    @Override
     public void onFetchJokeFinished(String joke) {
         mJoke = joke;
 
